@@ -1,5 +1,6 @@
 import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED } from "./actionTypes";
-import { initialState } from "./initialState"
+import initialState from "./initialState";
+
 
 const nextTodoId=(state)=>{
   const maxId= state.reduce((maxId,todo)=>Math.max(maxId,todo.id),-1)
