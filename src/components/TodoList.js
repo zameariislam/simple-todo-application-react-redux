@@ -1,13 +1,25 @@
 import Todo from "./Todo";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useEffect } from "react";
+import fetchData from "../redux/todos/thunk/fetchTodos";
+
+
 
 export default function TodoList() {
 
     const todos = useSelector((state) => state.todos)
     const filters = useSelector((state) => state.filters)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(fetchData)
+
+    },[dispatch])
+
+
+
     const { status, colors } = filters
 
-    const filterByStatus=(todo )=> {
+    const filterByStatus = (todo) => {
         switch (status) {
             case 'Complete':
                 return todo.completed
@@ -21,10 +33,10 @@ export default function TodoList() {
 
     }
 
-    const filterByColor=(todo) => {
+    const filterByColor = (todo) => {
         if (colors.length > 0) {
             return colors.includes(todo?.color)
-            
+
 
         }
         return true;
